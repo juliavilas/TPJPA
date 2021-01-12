@@ -2,6 +2,7 @@ package galerie.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import galerie.entity.Galerie;
+import org.springframework.data.jpa.repository.Query;
 
 // This will be AUTO IMPLEMENTED by Spring 
 
