@@ -16,7 +16,7 @@ import lombok.*;
  */
 // On utilise Lombok pour auto-générer getter / setter / toString...
 // cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
-@Getter @Setter @NoArgsConstructor  @ToString
+@Getter @Setter @RequiredArgsConstructor @ToString
 @Entity // Une entité JPA
 public class Exposition {
     @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -40,12 +40,10 @@ public class Exposition {
     @ManyToMany
     List<Tableau> oeuvres = new LinkedList<>();
     
-    
     public float CA(){
         float CA=0;
         for (Transaction t : ventes){
-            float nouveauCA = t.getPrixVente();
-            CA = CA + nouveauCA;
+            CA = CA + t.getPrixVente();
         }
         return CA;
     }

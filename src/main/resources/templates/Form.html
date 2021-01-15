@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css" />
+		<title>Ajouter une galerie</title>
+	</head>
+	<body>
+            <h1>Ajouter une galerie</h1>
+            <form method="POST" action ="save">
+                <div class=""column">
+                    <label for="nom">Nom :</label>
+                    <input id="nom" type=text" placeholder="Nom de la galerie" name="nom" value="">
+                    <input type=""submit" value="Enregistrer">
+                    <input type="reset" value="Réinitialiser">
+                </div>
+                <div class="column">
+                    <label for="adresse">Adresse :</label>
+                    <input id="adresse" type=text" placeholder="Adresse de la galerie" name="adresse" value="">
+                </div>
+            </form>
+            <hr>
+            <a href="/">Retour au menu</a>
+            <hr>
+    </body>
+</html>

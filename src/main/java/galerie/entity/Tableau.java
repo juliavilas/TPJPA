@@ -15,7 +15,7 @@ import lombok.*;
  */
 // On utilise Lombok pour auto-générer getter / setter / toString...
 // cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
-@Getter @Setter @NoArgsConstructor  @ToString
+@Getter @Setter @RequiredArgsConstructor  @ToString
 @Entity // Une entité JPA
 public class Tableau {
     
@@ -35,9 +35,9 @@ public class Tableau {
     private int hauteur;
     
     @ManyToOne
-    private Artiste artiste;
+    private Artiste auteur;
    
-    @ManyToMany(mappedBy = "oeuvres")
+    @ManyToMany(mappedBy = "oeuvres", cascade = CascadeType.PERSIST)
     List<Exposition> accrochages = new LinkedList<>();
     
     @OneToOne

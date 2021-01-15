@@ -9,13 +9,9 @@ INSERT INTO Exposition(id, debut, intitule, duree) VALUES
 INSERT INTO Tableau(id, titre, support, largeur, hauteur) VALUES
 (1,'New York Streets','huile sur toile',null,null);
 
+INSERT INTO Personne(DTYPE,id, nom, adresse,biographie) VALUES
+('Artiste',1,'Basquiat','Cimetiere Pere Lachaise','Peintre Newyorkais'),
+('Personne',2,'Remi Bastide','ISIS Castres',null);
 
-INSERT INTO Personne(id, nom, adresse) VALUES
-(1,'Basquiat','Cimetiere Pere Lachaise'),
-(2,'Remi Bastide','ISIS Castres');
-
-INSERT INTO Artiste(id, biographie) VALUES
-(1,'Peintre NewYorkais');
-
-INSERT INTO Transaction(id, venduLe, prixVente) VALUES
+INSERT INTO Transaction(id, vendu_le, prix_vente) VALUES
 (1,'2012-01-01',200);

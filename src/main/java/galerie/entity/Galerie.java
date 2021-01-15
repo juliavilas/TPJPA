@@ -1,4 +1,5 @@
 package galerie.entity;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.*;
@@ -6,7 +7,7 @@ import lombok.*;
 // Un exemple d'entité
 // On utilise Lombok pour auto-générer getter / setter / toString...
 // cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
-@Getter @Setter @NoArgsConstructor @ToString
+@Getter @Setter @RequiredArgsConstructor @ToString
 @Entity // Une entité JPA
 public class Galerie {
     @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -19,14 +20,22 @@ public class Galerie {
     private String adresse;
     
     @OneToMany(mappedBy = "organisateur", cascade = CascadeType.PERSIST)
-    private List<Exposition> evenements;
+    private List<Exposition> evenements = new LinkedList<>();
+
     
     public float CAannuel(int annee){
         float CAannuel=0;
         for(Exposition e :evenements){
-            float CA = e.CA();
-            CAannuel=CAannuel+CA;
+            CAannuel=CAannuel+e.CA();
         }
         return CAannuel;
     }
+    
+// J'ai dû créer un constructeur pour créer des galeries dans GalerieTest car java ne voulait pas que je mette d'arguments.
+    public Galerie(Integer id, String nom, String adresse) {
+        this.id = id;
+        this.nom = nom;
+        this.adresse = adresse;
+    }
+    
 }

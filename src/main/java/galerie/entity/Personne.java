@@ -18,7 +18,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity // Une entité JPA
 public class Personne {
 
@@ -35,14 +35,13 @@ public class Personne {
     @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
     private List<Transaction> transactions;
 
-//    public float budgetArt(int annee) {
-//        float budget = 0;
-//        for (Transaction t : transactions) {
-//            if (t.getVenduLe().getYear() = annee) {
-//                float prix = t.getPrixVente();
-//                budget=budget+prix;
-//            }
-//        }
-//        return budget;
-//    }
+    public float budgetArt(int annee) {
+        float budget = 0;
+        for (Transaction t : transactions) {
+            if (t.getVenduLe().getYear() == annee) {
+                budget=budget+t.getPrixVente();
+            }
+        }
+        return budget;
+    }
 }
