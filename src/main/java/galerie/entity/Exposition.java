@@ -48,4 +48,13 @@ public class Exposition {
         return CA;
     }
 
+    public Exposition(LocalDate debut, String intitule, int duree, Galerie organisateur) {
+        this.debut = debut;
+        this.intitule = intitule;
+        this.duree = duree;
+        this.organisateur = organisateur;
+    }
+    
+    
+
 }

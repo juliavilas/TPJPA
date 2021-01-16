@@ -42,6 +42,15 @@ public class Tableau {
     
     @OneToOne
     private Transaction vendu;
+
+    public Tableau(String titre, String support, int largeur, int hauteur, Artiste auteur, Transaction vendu) {
+        this.titre = titre;
+        this.support = support;
+        this.largeur = largeur;
+        this.hauteur = hauteur;
+        this.auteur = auteur;
+        this.vendu = vendu;
+    }
     
     
 }

@@ -44,4 +44,11 @@ public class Personne {
         }
         return budget;
     }
+
+    public Personne(String nom, String adresse, List<Transaction> transactions) {
+        this.nom = nom;
+        this.adresse = adresse;
+        this.transactions = transactions;
+    }
+    
 }

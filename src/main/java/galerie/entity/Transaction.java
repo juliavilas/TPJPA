@@ -37,7 +37,13 @@ public class Transaction {
     
     @ManyToOne
     private Personne client;
-    
-    
+
+    public Transaction(LocalDate venduLe, float prixVente, Exposition lieuDeVente, Tableau oeuvre, Personne client) {
+        this.venduLe = venduLe;
+        this.prixVente = prixVente;
+        this.lieuDeVente = lieuDeVente;
+        this.oeuvre = oeuvre;
+        this.client = client;
+    }
     
 }

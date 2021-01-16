@@ -33,4 +33,8 @@ public class Artiste extends Personne {
     @OneToMany(mappedBy = "auteur", cascade = CascadeType.PERSIST)
     List<Tableau> oeuvres = new LinkedList<>();
 
+    public Artiste(String biographie) {
+        this.biographie = biographie;
+    }
+
 }
