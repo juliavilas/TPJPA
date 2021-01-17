@@ -27,10 +27,11 @@ public class ExpositionRepositoryTest {
     @Test
     @Sql("test-data.sql") // On peut charger des donnnées spécifiques pour un test
     public void testCA() {
-        log.info("On calcule le CA de l'exposition 1");
-        float CA =expositionDAO.chiffreAffairePour(1);
-        log.info("Le CA de l'exposition 1 est de 200");
-        assertEquals(200, CA, "Le CA doit être égal à 200");
+        log.info("On teste la méthode CA() de l'exposition 2");
+        float CAattendu = 200;
+        float CA =expositionDAO.chiffreAffairePour(2);
+        log.info("Le CA de l'exposition 2 est de 200");
+        assertEquals(CAattendu, CA, "Le CA doit être égal à 200");
     }
    
 }

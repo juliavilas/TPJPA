@@ -26,19 +26,10 @@ public interface ExpositionRepository extends JpaRepository<Exposition, Integer>
             value = 
             "SELECT SUM(prix_vente) AS CA "
             + "FROM Exposition "
-            + "INNER JOIN Transaction ON Transaction_lieu_de_vente = lieu_de_vente "
-            + "WHERE Exposition_id=:id ",
+            + "INNER JOIN Transaction ON Transaction.lieu_de_vente_id = lieu_de_vente_id "
+            + "WHERE Exposition.id=:id ",
             nativeQuery = true
             )
     float chiffreAffairePour(Integer id);
 
-    //JPQL
-//    @Query("SELECT p.nom as nom, SUM(li.quantite) AS unites "
-//		+ "FROM Categorie c "
-//		+ "JOIN c.produits p "
-//		+ "JOIN p.lignes li "
-//		+ "WHERE c.code = :codeCategorie "
-//		+ "GROUP BY p.nom ")
-//    float chiffreAffairePour(Integer id);
-    
 }

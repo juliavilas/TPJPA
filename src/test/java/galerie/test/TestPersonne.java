@@ -27,9 +27,9 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class TestPersonne {
     
-    private Galerie g1, g2;
+    private Galerie g1,g2;
     private Exposition e1;
-    private Transaction t1,t2,t3;
+    private Transaction t1,t2;
     private Tableau ta1, ta2;
     private Artiste a1;
     private Personne p1;
