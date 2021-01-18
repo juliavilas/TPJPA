@@ -1,54 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package galerie.entity;
-
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.*;
 
-/**
- *
- * @author Juju Vilas
- */
+// Un exemple d'entité
 // On utilise Lombok pour auto-générer getter / setter / toString...
 // cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Entity // Une entité JPA
 public class Personne {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
 
-    @Column(unique = true)
+    @NonNull
     private String nom;
-
-    @Column(unique = true)
-    private String adresse;
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
-    private List<Transaction> transactions;
-
-    public float budgetArt(int annee) {
-        float budget = 0;
-        for (Transaction t : transactions) {
-            if (t.getVenduLe().getYear() == annee) {
-                budget=budget+t.getPrixVente();
-            }
-        }
-        return budget;
-    }
-
-    public Personne(String nom, String adresse, List<Transaction> transactions) {
-        this.nom = nom;
-        this.adresse = adresse;
-        this.transactions = transactions;
-    }
     
+    @Column(unique=true)
+    private String adresse;
+    
+    @OneToMany(mappedBy = "client")
+    @ToString.Exclude
+    private List<Transaction> achats = new LinkedList<>();
+    
+    public float budgetArt(int annee) {
+        float result=0.0f;
+        for (Transaction achat : achats)
+            if (achat.getVenduLe().getYear() == annee)
+                result += achat.getPrixVente();
+        return result;
+        // Peut s'écrire en utilisant l'API Stream 
+        // cf. https://www.baeldung.com/java-stream-filter-lambda
+        /*
+        return achats.stream()
+                .filter( achat -> achat.getVenduLe().getYear() == annee) // On filtre sur l'annee
+                .map(achat -> achat.getPrixVente()) // On garde le prix de vente
+                .reduce(0f, Float::sum); // On additionne
+       */
+    }    
 }

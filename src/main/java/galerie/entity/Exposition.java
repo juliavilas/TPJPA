@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package galerie.entity;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -10,51 +5,39 @@ import java.util.List;
 import javax.persistence.*;
 import lombok.*;
 
-/**
- *
- * @author Juju Vilas
- */
-// On utilise Lombok pour auto-générer getter / setter / toString...
-// cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
-@Getter @Setter @RequiredArgsConstructor @ToString
+@Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Entity // Une entité JPA
 public class Exposition {
     @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
 
-    @Column
-    private LocalDate debut;
-    
-    @Column
+    @NonNull
     private String intitule;
     
-    @Column
-    private int duree;
- 
+    private LocalDate debut = LocalDate.now();    
+    
+    private Integer duree = 10;
+    
     @ManyToOne
-    private Galerie organisateur;
-    
-    @OneToMany(mappedBy = "lieuDeVente", cascade = CascadeType.PERSIST)
-    private List<Transaction> ventes = new LinkedList<>();
-    
+    @NonNull
+    Galerie organisateur;
+
     @ManyToMany
+    @ToString.Exclude
     List<Tableau> oeuvres = new LinkedList<>();
     
-    public float CA(){
-        float CA=0;
-        for (Transaction t : ventes){
-            CA = CA + t.getPrixVente();
-        }
-        return CA;
-    }
-
-    public Exposition(LocalDate debut, String intitule, int duree, Galerie organisateur) {
-        this.debut = debut;
-        this.intitule = intitule;
-        this.duree = duree;
-        this.organisateur = organisateur;
-    }
+    @OneToMany(mappedBy = "lieuDeVente")
+    @ToString.Exclude
+    private List<Transaction> ventes = new LinkedList<>();
     
-    
+    public float CA() {
+        float result =0.0f;
+        for (Transaction vente : ventes)
+            result += vente.getPrixVente();
+        return result;
+        // Ca peut s'écrire en une seule ligne avec l'API Stream API.
+        // cf. https://www.baeldung.com/java-stream-sum
+        // return ventes.stream().map(vente -> vente.getPrixVente()).reduce(0f, Float::sum);
+    }
 
 }
